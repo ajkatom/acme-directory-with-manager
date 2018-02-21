@@ -1,0 +1,33 @@
+<!-- ******************************************
+*  Author : Author   
+*  Created On : Sat Feb 17 2018
+*  File : layout.html
+******************************************* -->
+
+<html>
+  <head>
+        <title>{{ title }}</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+  </head>
+  <body>
+  
+   <div class='container'>
+          <h1>{{ title }}</h1>
+          <h3>the amount of employees we have {{employeeCount}} and we have {{managerCount}} managers</h3>
+     <nav>
+     
+      <ul class="nav nav-pills">
+        <a class="nav-item nav-link {% if path==='/' %} active {% endif %}" href='/'>Home</a> <span class="sr-only"></span></a>
+        <a class="nav-item nav-link {% if path==='/employees' %} active {% endif %}" href='/employees'>employees</a><span></span></a>
+      </ul>
+          
+     </nav>
+     </br>
+      {%block content%}
+      {%endblock%}
+
+  </div>
+  </body>
+</html>

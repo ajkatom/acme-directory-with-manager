@@ -1,0 +1,72 @@
+<!-- ******************************************
+*  Author : Author   
+*  Created On : Sat Feb 17 2018
+*  File : employees.html
+******************************************* -->
+
+{% extends "./layout.html" %}
+{% block content %}
+ <ul>
+  <div style="display: flex">
+ 
+<form action = '/employees' method='POST' >
+ <strong><h4>HIRE AN EMPLOYEE</h4></strong> 
+            <input name ='email' value='' placeholder = 'employee email'/>
+            </br>
+            <a>manager's email</a>
+            </br>
+             <select class='form-control' name='ManagerId' value = None>
+                 <option value=-1>None</option>
+               
+                 {% for emp in employees %}
+                   <option {% if emp.ManagerId === emp.id %}selected{% endif %} value='{{emp.id}}'>{{emp.name}}</option>
+                 {% endfor %}
+            
+             </select>
+            </br> 
+              <button>HIRE</button>
+             </form>
+   
+        {% for employee in employees%}
+        
+        <li>
+           <a>{{employee.name}}</a>
+            </br>
+            <a>email provider: <b>{{employee.emailProvider}}</b></a>
+            </br>
+         <form method = 'POST' action = '/employees/{{employee.id}}?_method=PATCH'>
+            <input name ='email' value={{employee.email}} />
+            </br>
+            <a>manager's email</a>
+            </br>
+             <select class='form-control' name='ManagerId'>
+                 <option value='-1'>None</option>
+                 {% for emp in employees %}
+                 <option {% if employee.ManagerId === emp.id %}selected{%endif%} value='{{emp.id}}'>{{emp.email}}</option>
+                 {% endfor %}
+             </select>
+            </br> 
+              <button>UPDATE</button>
+             </form>
+              
+            <form method = 'POST' action = '/employees/{{employee.id}}?_method=DELETE'>
+                <button>DELETE</button>
+             </form>
+
+              <h5><b>manages:</b></h5>
+             {% for emp in employees %}
+             {% if emp.ManagerId === employee.id %}
+                    </br>
+                    {{emp.name}}
+                    
+             {%endif%}
+             {%endfor%}
+           
+                
+       
+        {% endfor %}
+        </li>
+         </div>
+    </ul> 
+   
+{% endblock %}
